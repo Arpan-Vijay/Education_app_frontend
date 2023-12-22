@@ -1,0 +1,128 @@
+.section__padding {
+  padding: 2rem 1rem;
+}
+
+.p-text__gray {
+  font-size: 1rem;
+  text-align: left;
+  /* color: var(--gray-color); */
+  color: gray;
+  line-height: 1.5;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.75rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 0.7rem;
+  }
+}
+
+.p-text__white {
+  font-size: 1rem;
+  text-align: left;
+  /* color: var(--gray-color); */
+  color: white;
+  line-height: 1.5;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 1.75rem;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 0.7rem;
+  }
+}
+
+.bold-text {
+  font-size: 1rem;
+  font-weight: 500;
+  /* color: var(--black-color); */
+  color: black;
+  text-align: left;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Styles related to personal info page for both students and teachers */
+
+.profile__detailed-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+.content__card {
+  /*global*/
+  /*styling for multiple cards*/
+  width: 45%;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+  border-radius: 2px;
+  position: relative;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  overflow: hidden;
+  border-radius: 3px;
+
+}
+
+.content__card-full-length {
+  /*styling for one big card*/
+  width: 100%;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+  border-radius: 2px;
+  position: relative;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.content__card-heading {
+  /*global*/
+  font-size: 1.2rem;
+  padding: 1rem 0 1rem 1.5rem;
+  position: relative;
+}
+
+.cards {
+  display: flex;
+  flex-direction: columns;
+}
+
+
+.content__card-table {
+  margin: 0rem 1.5rem 1.5rem 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.content__card-table .content__table-col-heading,
+.content__card-table .content__table-data {
+  line-height: 1.7rem;
+  border-bottom: 1px solid #ddd;
+  /* Adjust the color as needed */
+  padding: 8px;
+  text-align: left;
+}
+
+.content__table-col-heading {
+  font-weight: 500;
+  color: grey;
+}
