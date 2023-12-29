@@ -27,28 +27,11 @@ const PublishCourse = () => {
     }
   }, []); // Empty dependency array to trigger the effect once on mount
 
-  // Tempropary functions : delete later
-
-  // Function to generate a random number between min and max (inclusive)
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
-  // Function to generate dummy data for the "Students Enrolled" and "Completion Rate" columns
-  const generateDummyData = () => {
-    return {
-      studentsEnrolled: getRandomNumber(10, 100),
-      completionRate: getRandomNumber(50, 100),
-    };
-  };
-
-  // Tempropary functions : delete later
-
   // JSX rendering of the component
   return (
     <section className="publish__course">
       <div className="publish__course-header">
-        <h3 className="publish__course-heading h-text ">Publish Course</h3>
+        <h3 className="publish__course-heading h-text ">Courses</h3>
 
         <div className="buttons">
           <div class="container-input">
@@ -74,7 +57,7 @@ const PublishCourse = () => {
               <i class="bx bx-objects-vertical-bottom"></i>
             </div>
           </div>
-          {/* <button className="cta_button">Create Course</button> */}
+          <button className="cta_button" to='/course-builder'>Create Course</button>
         </div>
       </div>
 
@@ -87,25 +70,18 @@ const PublishCourse = () => {
                 <th className="content__table-col-heading">Subject</th>
                 <th className="content__table-col-heading">Course Name</th>
                 <th className="content__table-col-heading">Total Chapters</th>
-                <th className="content__table-col-heading">
-                  Students Enrolled
-                </th>
-                <th className="content__table-col-heading">Completion Rate</th>
+                <th className="content__table-col-heading">Status</th>
               </tr>
-              
-              {userCourses.map((course, index) => {
-                const dummyData = generateDummyData(); // Generate dummy data for each course
-
-                return (
-                  <tr key={index} className="content__table">
-                    <td className="content__table-data">{course.subject_name}</td>
-                    <td className="content__table-data">{course.course_name}</td>
-                    <td className="content__table-data">{course.total_chapters}</td>
-                    <td className="content__table-data">{dummyData.studentsEnrolled}</td>
-                    <td className="content__table-data">{dummyData.completionRate}%</td>
-                  </tr>
-                );
-              })}
+              {userCourses.map((course, index) => (
+                <tr key={index} className="content__table">
+                  <td className="content__table-data">{course.subject_name}</td>
+                  <td className="content__table-data">{course.course_name}</td>
+                  <td className="content__table-data">
+                    {course.total_chapters}
+                  </td>
+                  <td className="content__table-data">{course.status}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -115,3 +91,4 @@ const PublishCourse = () => {
 };
 
 export default PublishCourse;
+

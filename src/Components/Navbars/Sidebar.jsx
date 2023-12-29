@@ -5,7 +5,7 @@ import avatar from "../../assets/teacher_img.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
-  const [isSidebarClosed, setSidebarClosed] = useState(true);
+  const [isSidebarClosed, setSidebarClosed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const excludedRoutes = [
@@ -43,33 +43,22 @@ const Sidebar = ({ children }) => {
         <div className={`sidebar ${isSidebarClosed ? "close" : ""}`}>
           <div className="logo-details">
             <i className="bx bx-menu" onClick={handleSidebarToggle}></i>
+            <span class="logo_name">Knowledge<span className="light">Nest</span></span>
           </div>
           <ul className="nav-links">
             <li>
               <Link to="/home">
-                <i className="bx bx-grid-alt"></i>
+              <i class='bx bx-home-alt'></i>
                 <span className="link_name">Home</span>
               </Link>
             </li>
             <li>
               <div className="iocn-link">
-                <Link to="#">
+                <Link to="/courses">
                   <i className="bx bx-collection"></i>
-                  <span className="link_name">Course</span>
+                  <span className="link_name">All Courses</span>
                 </Link>
-                <i
-                  className="bx bxs-chevron-down arrow"
-                  onClick={handleArrowClick}
-                ></i>
               </div>
-              <ul className="sub-menu">
-                <li>
-                  <Link to="/course-builder">Create Course</Link>
-                </li>
-                <li>
-                  <Link to="#">Edit Course</Link>
-                </li>
-              </ul>
             </li>
             <li>
               <Link to="/publish-course">
@@ -84,8 +73,14 @@ const Sidebar = ({ children }) => {
                 <span className="link_name">Personal Info</span>
               </Link>
             </li>
+            <li>
+              <Link to="/login" onClick={handleLogout}>
+                <i className="bx bx-log-out logout_btn"></i>
+                <span className="link_name">Logout</span>
+              </Link>
+            </li>
           </ul>
-          <div className="profile-details">
+          {/* <div className="profile-details">
             <div className="profile-content">
               <img src={avatar} alt="profileImg" />
             </div>
@@ -95,7 +90,7 @@ const Sidebar = ({ children }) => {
             <Link to="/login" onClick={handleLogout}>
               <i className="bx bx-log-out logout_btn"></i>
             </Link>
-          </div>
+          </div> */}
         </div>
       )}
       {/* Main Content Section */}

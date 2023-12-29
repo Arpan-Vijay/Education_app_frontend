@@ -9,6 +9,7 @@ import ForgotPassword from './Components/UserLogin/ForgotPassword';
 import Otp from './Components/UserLogin/Otp';
 import ResetPassword from './Components/UserLogin/ResetPassword';
 import Home from './Components/Dashboard/Home';
+import AllCourses from './Components/Dashboard/AllCourses.jsx';
 import CourseBuilder from './Components/CourseBuilder/CourseBuilder.js';
 import TeacherProfile from './Components/Profile/TeacherProfile.jsx';
 import PublishCourse from './Components/PublishCourse/PublishCourse.jsx';
@@ -49,6 +50,7 @@ const App = () => {
             <Sidebar>
               <Routes>
                 <Route path='/home' element={<Home />} />
+                <Route path='/courses' element={<AllCourses />} />
                 <Route path='/course-builder' element={<CourseBuilder />} />
                 <Route path='/teacher-profile' element={<TeacherProfile />} />
                 <Route path='/publish-course' element={<PublishCourse />} />
