@@ -1,11 +1,10 @@
 // Sidebar.jsx
 import React, { useState, useEffect } from "react";
 import "../../Styles/Home.css";
-import avatar from "../../assets/teacher_img.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const Sidebar = ({ children }) => {
-  const [isSidebarClosed, setSidebarClosed] = useState(false);
+const Sidebar = ({ children, userRole }) => {
+  const [isSidebarClosed, setSidebarClosed] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const excludedRoutes = [
@@ -15,7 +14,6 @@ const Sidebar = ({ children }) => {
     "/resetPassword",
   ];
   const shouldExcludeSidebar = excludedRoutes.includes(location.pathname);
-  const First_Name = location.state ? location.state.First_Name : "";
 
   useEffect(() => {
     const token = localStorage.getItem("auth");
@@ -24,10 +22,10 @@ const Sidebar = ({ children }) => {
     }
   }, [navigate]);
 
-  const handleArrowClick = (e) => {
-    const arrowParent = e.target.parentElement.parentElement;
-    arrowParent.classList.toggle("showMenu");
-  };
+  // const handleArrowClick = (e) => {
+  //   const arrowParent = e.target.parentElement.parentElement;
+  //   arrowParent.classList.toggle("showMenu");
+  // };
 
   const handleSidebarToggle = () => {
     setSidebarClosed(!isSidebarClosed);
@@ -43,30 +41,51 @@ const Sidebar = ({ children }) => {
         <div className={`sidebar ${isSidebarClosed ? "close" : ""}`}>
           <div className="logo-details">
             <i className="bx bx-menu" onClick={handleSidebarToggle}></i>
-            <span class="logo_name">Knowledge<span className="light">Nest</span></span>
+            <span className="logo_name">
+              Knowledge<span className="light">Nest</span>
+            </span>
           </div>
           <ul className="nav-links">
-            <li>
-              <Link to="/home">
-              <i class='bx bx-home-alt'></i>
-                <span className="link_name">Home</span>
-              </Link>
-            </li>
-            <li>
-              <div className="iocn-link">
-                <Link to="/courses">
-                  <i className="bx bx-collection"></i>
-                  <span className="link_name">All Courses</span>
-                </Link>
-              </div>
-            </li>
-            <li>
-              <Link to="/publish-course">
-                <i className="bx bx-grid-alt"></i>
-                <span className="link_name">Publish Course</span>
-              </Link>
-            </li>
-
+            {userRole === "teacher" && (
+              <>
+                <li>
+                  <Link to="/home">
+                    <i className="bx bx-home-alt"></i>
+                    <span className="link_name">Home</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/courses">
+                    <i className="bx bx-collection"></i>
+                    <span className="link_name">All Courses</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/publish-course">
+                    <i className="bx bx-grid-alt"></i>
+                    <span className="link_name">Publish Course</span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {userRole === "admin" && (
+              <>
+                {/* Admin-specific links */}
+                <li>
+                  <Link to="/admin/home">
+                    <i className="bx bx-home-alt"></i>
+                    <span className="link_name">Home</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/admin/schools-information">
+                    <i className="bx bxs-school"></i>
+                    <span className="link_name">Schools</span>
+                  </Link>
+                </li>
+              </>
+            )}
+            {/* ... (other common links) */}
             <li>
               <Link to="/teacher-profile">
                 <i className="bx bx-info-circle"></i>
@@ -80,17 +99,6 @@ const Sidebar = ({ children }) => {
               </Link>
             </li>
           </ul>
-          {/* <div className="profile-details">
-            <div className="profile-content">
-              <img src={avatar} alt="profileImg" />
-            </div>
-            <div className="name-job">
-              <div className="profile_name">{First_Name}</div>
-            </div>
-            <Link to="/login" onClick={handleLogout}>
-              <i className="bx bx-log-out logout_btn"></i>
-            </Link>
-          </div> */}
         </div>
       )}
       {/* Main Content Section */}

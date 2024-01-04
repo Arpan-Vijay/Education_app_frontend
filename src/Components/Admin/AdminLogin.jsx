@@ -1,4 +1,4 @@
-// Login.jsx
+// AdminLogin.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Styles/Login.css";
@@ -6,12 +6,13 @@ import axios from "axios";
 import schoolLogo from "../../assets/app_logo.png";
 
 import { BsEyeFill, BsEyeSlashFill, BsFillPersonFill } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa";
 
-const Login = () => {
+const AdminLogin = () => {
   const [greeting, setGreeting] = useState("");
   const [credentials, setCredentials] = useState({
-    sap_id: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState("");
@@ -48,14 +49,14 @@ const Login = () => {
       const data = await response.json();
 
       // Log quotes and authors to the console for debugging
-      console.log(
-        "Quotes:",
-        data.map((quote) => quote.text)
-      );
-      console.log(
-        "Authors:",
-        data.map((quote) => quote.author || "Unknown")
-      );
+      // console.log(
+      //   "Quotes:",
+      //   data.map((quote) => quote.text)
+      // );
+      // console.log(
+      //   "Authors:",
+      //   data.map((quote) => quote.author || "Unknown")
+      // );
 
       if (data.length > 0) {
         // Pick a random quote from the fetched data
@@ -136,11 +137,11 @@ const Login = () => {
 
   // Function to handle login form submission
 
-  const handleLogin = (event) => {
+  const handleAdminLogin = (event) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost:3001/login", credentials)
+      .post("http://localhost:3001/adminLogin", credentials)
       .then((res) => {
         console.log("Login Response:", res); // Log the entire response for debugging
 
@@ -149,14 +150,14 @@ const Login = () => {
           // Access token with res.data.token
           localStorage.setItem("auth", res.data.token);
           // Navigate to home without passing First_Name in the route
-          navigate("/home");
+          navigate("/admin/home");
         } else {
-          setError("Sap ID or password is incorrect");
+          setError("Email or password is incorrect");
         }
       })
       .catch((err) => {
         console.error("Login Error:", err); // Log the error for debugging
-        setError("Sap ID or password is incorrect");
+        setError("Email or password is incorrect");
       });
   };
 
@@ -167,8 +168,8 @@ const Login = () => {
   // JSX rendering of the component
   return (
     <div className="login">
-      <div className="login_container">
-        <div className="login-left">
+      <div className="login_container" >
+        {/* <div className="login-left">
           <div className="left-glass">
             <h2 className="greetings">{greeting}</h2>
             <div className="quote-container">
@@ -181,7 +182,7 @@ const Login = () => {
               <p className="quote-author">{loading ? "Fetching..." : author}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="login-right">
           <div className="flex_center">
@@ -194,19 +195,19 @@ const Login = () => {
 
           {error && <div className="error_message">{error}</div>}
 
-          <div className="form" style={{ width: "70%" }}>
+          <div className="form" style={{ width: "40%" }}>
             {/* Name input with icon */}
             <div className="input_form">
-              <BsFillPersonFill className="icon" />
+              <MdEmail className="icon" />
               <input
-                type="text"
+                type="email"
                 className="textbox"
-                placeholder="User Id"
-                value={credentials.sap_id}
+                placeholder="Email"
+                value={credentials.email}
                 onChange={(e) =>
                   setCredentials({
                     ...credentials,
-                    sap_id: e.target.value,
+                    email: e.target.value,
                   })
                 }
               />
@@ -236,13 +237,13 @@ const Login = () => {
             <button
               className="primary_cta_button"
               type="submit"
-              onClick={handleLogin}
+              onClick={handleAdminLogin}
             >
               Log In
             </button>
           </div>
 
-          <div className="cta_trigger" style={{ width: "60%" }}>
+          <div className="cta_trigger" style={{ width: "35%" }}>
             <div className="triggers">
               <span>
                 <Link className="cta_trigger_btn" to="/forgotPassword">
@@ -250,8 +251,8 @@ const Login = () => {
                 </Link>
               </span>
               <span>
-                <Link className="cta_trigger_btn" to="/login/adminLogin">
-                  Login as Admin
+                <Link className="cta_trigger_btn" to="/login">
+                  Login as Student or Teacher
                 </Link>
               </span>
             </div>
@@ -262,4 +263,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

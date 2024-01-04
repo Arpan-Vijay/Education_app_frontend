@@ -3,30 +3,30 @@ import axios from "axios";
 import "../../Styles/PublishCourse.css";
 import { Link } from "react-router-dom";
 
-const AllCourses = () => {
-  const [userCourses, setUserCourses] = useState([]);
+const AdminAllUsers = () => {
+//   const [userCourses, setUserCourses] = useState([]);
 
-  useEffect(() => {
-    try {
-      // Retrieve the JWT token from localStorage
-      const userId = localStorage.getItem("auth");
+//   useEffect(() => {
+//     try {
+//       // Retrieve the JWT token from localStorage
+//       const userId = localStorage.getItem("auth");
 
-      if (userId) {
-        axios
-          .post("http://localhost:3001/api/fetch-user-data", {
-            user_id: userId,
-          })
-          .then((res) => {
-            setUserCourses(res.data.userData || []);
-          })
-          .catch((error) => {
-            console.error("Error fetching user courses:", error);
-          });
-      }
-    } catch (error) {
-      console.error("Error parsing JWT token:", error);
-    }
-  }, []); // Empty dependency array to trigger the effect once on mount
+//       if (userId) {
+//         axios
+//           .post("http://localhost:3001/api/fetch-user-data", {
+//             user_id: userId,
+//           })
+//           .then((res) => {
+//             setUserCourses(res.data.userData || []);
+//           })
+//           .catch((error) => {
+//             console.error("Error fetching user courses:", error);
+//           });
+//       }
+//     } catch (error) {
+//       console.error("Error parsing JWT token:", error);
+//     }
+//   }, []); // Empty dependency array to trigger the effect once on mount
 
   // JSX rendering of the component
   return (
@@ -63,9 +63,11 @@ const AllCourses = () => {
               <i class="bx bx-objects-vertical-bottom"></i>
             </div>
           </div>
-          
-            <Link to="/create-course"> <button className="cta_button">Create Course</button></Link>
-          
+
+          <Link to="/admin/add-teacher">
+            {" "}
+            <button className="cta_button">Add Teacher</button>
+          </Link>
         </div>
       </div>
 
@@ -75,21 +77,21 @@ const AllCourses = () => {
           <table className="content__card-table">
             <tbody>
               <tr>
-                <th className="content__table-col-heading">Subject</th>
-                <th className="content__table-col-heading">Course Name</th>
-                <th className="content__table-col-heading">Total Chapters</th>
-                <th className="content__table-col-heading">Status</th>
+                <th className="content__table-col-heading">Name</th>
+                <th className="content__table-col-heading">Subjects</th>
+                <th className="content__table-col-heading">Classes</th>
+                <th className="content__table-col-heading">Contact Info</th>
+                <th className="content__table-col-heading">Joining Date</th>
+                <th className="content__table-col-heading">SAP ID</th>
               </tr>
-              {userCourses.map((course, index) => (
-                <tr key={index} className="content__table">
-                  <td className="content__table-data">{course.subject_name}</td>
-                  <td className="content__table-data">{course.course_name}</td>
-                  <td className="content__table-data">
-                    {course.total_chapters}
-                  </td>
-                  <td className="content__table-data">{course.status}</td>
+                <tr className="content__table">
+                  <td className="content__table-data">Arpan Vijay</td>
+                  <td className="content__table-data">Maths , Science , English, Hindi , Physical Education , Computer</td>
+                  <td className="content__table-data">1,10,4,3,6,7</td>
+                  <td className="content__table-data">7726022012</td>
+                  <td className="content__table-data">02/01/2024</td>
+                  <td className="content__table-data">1122334455</td>
                 </tr>
-              ))}
             </tbody>
           </table>
         </div>
@@ -98,4 +100,4 @@ const AllCourses = () => {
   );
 };
 
-export default AllCourses;
+export default AdminAllUsers;

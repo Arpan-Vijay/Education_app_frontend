@@ -138,7 +138,7 @@
 .one {
   width: 80%;
   margin-left: 10%;
-  background-color: #f6f5ff;
+  background-color: rgba(255, 255, 255, 0.85);
   height: 400px;
 }
 
